@@ -1,0 +1,10 @@
+com\example\zumbasquad\controller\ReservaControllerTest.class
+com\example\zumbasquad\controller\CaracteristicaControllerTest.class
+com\example\zumbasquad\controller\CidadeControllerTest.class
+com\example\zumbasquad\controller\ProdutoControllerTest.class
+com\example\zumbasquad\service\CidadeServiceTest.class
+com\example\zumbasquad\service\CategoriaServiceTest.class
+com\example\zumbasquad\service\ProdutoServiceTest.class
+com\example\zumbasquad\service\ReservaServiceTest.class
+com\example\zumbasquad\service\CaracteristicaServiceTest.class
+com\example\zumbasquad\controller\CategoriaControllerTest.class
