@@ -1,13 +1,10 @@
 package com.example.zumbasquad.controller;
 
 import com.example.zumbasquad.config.JwtAuthenticationFilter;
-import com.example.zumbasquad.config.JwtService;
-import com.example.zumbasquad.exceptions.BadRequestException;
-import com.example.zumbasquad.model.Caracteristica;
+import com.example.zumbasquad.auth.JwtService;
 import com.example.zumbasquad.model.Categoria;
 import com.example.zumbasquad.service.CategoriaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assertj.core.error.ShouldBeBlank;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,15 +19,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.CoreMatchers.is;
 
 @WebMvcTest(controllers = CategoriaController.class)
 @ActiveProfiles("test")

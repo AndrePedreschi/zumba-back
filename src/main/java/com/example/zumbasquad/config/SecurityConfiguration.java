@@ -3,7 +3,9 @@ package com.example.zumbasquad.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableMethodSecurity
 public class SecurityConfiguration {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
@@ -30,11 +33,12 @@ public class SecurityConfiguration {
                 .csrf().disable()
                 //implementing allowlist
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/**", "/categorias/**", "/cidades/**", "/caracteristicas/**", "/produtos/**")
-                .permitAll()
+                .requestMatchers(HttpMethod.GET,"/auth/**", "/categorias/**", "/cidades/**", "/caracteristicas/**", "/produtos/**", "/reservas/por_produto/**").permitAll()
+                .requestMatchers(HttpMethod.PUT,"/auth/**", "/categorias/**", "/cidades/**", "/caracteristicas/**").permitAll()
+                .requestMatchers(HttpMethod.DELETE,"/auth/**", "/categorias/**", "/cidades/**", "/caracteristicas/**", "/produtos/**").permitAll()
+                .requestMatchers(HttpMethod.POST,"/auth/**", "/categorias/**", "/cidades/**", "/caracteristicas/**").permitAll()
                 //authenticated requests
-                .anyRequest()
-                .authenticated()
+                .anyRequest().authenticated()
                 //creating session requirements
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

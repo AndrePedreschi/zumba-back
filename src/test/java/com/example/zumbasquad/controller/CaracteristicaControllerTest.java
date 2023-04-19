@@ -1,7 +1,7 @@
 package com.example.zumbasquad.controller;
 
 import com.example.zumbasquad.config.JwtAuthenticationFilter;
-import com.example.zumbasquad.config.JwtService;
+import com.example.zumbasquad.auth.JwtService;
 import com.example.zumbasquad.exceptions.BadRequestException;
 import com.example.zumbasquad.model.Caracteristica;
 import com.example.zumbasquad.service.CaracteristicaService;
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -27,7 +28,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.CoreMatchers.is;
 
 @WebMvcTest(controllers = CaracteristicaController.class)
 @ActiveProfiles("test")

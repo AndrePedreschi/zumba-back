@@ -1,5 +1,6 @@
 package com.example.zumbasquad.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,10 +15,21 @@ public class Detalhe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
+    @Column(columnDefinition = "TEXT")
     private String regrasDaCasa;
+    @Column(columnDefinition = "TEXT")
     private String politicaDeCancelamento;
+    @Column(columnDefinition = "TEXT")
     private String saudeESeguranca;
     @OneToOne(mappedBy = "detalhes")
+    @JsonIgnore
     private Produto produto;
+
+    public Detalhe(Long id, String regrasDaCasa, String politicaDeCancelamento, String saudeESeguranca) {
+        this.id = id;
+        this.regrasDaCasa = regrasDaCasa;
+        this.politicaDeCancelamento = politicaDeCancelamento;
+        this.saudeESeguranca = saudeESeguranca;
+    }
 }

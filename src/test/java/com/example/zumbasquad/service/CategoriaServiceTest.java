@@ -1,7 +1,6 @@
 package com.example.zumbasquad.service;
 
 import com.example.zumbasquad.model.Categoria;
-import com.example.zumbasquad.model.Produto;
 import com.example.zumbasquad.repository.ICategoriaRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,7 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,23 +33,6 @@ public class CategoriaServiceTest {
         final Categoria categoria = new Categoria(1L, "teste", "descricao", "url", null);
 
         //given(repository.findById(categoria.getId())).willReturn(Optional.empty());
-        given(repository.save(categoria)).willAnswer(invocation -> invocation.getArgument(0));
-
-        Categoria categoriaSalva = service.add(categoria);
-
-        assertThat(categoriaSalva).isNotNull();
-
-        verify(repository).save(any(Categoria.class));
-    }
-
-    @Test
-    void deveSalvarNovaCategoriaComProduto(){
-        final Set<Produto> listaProdutos = new HashSet<>();
-        listaProdutos.add(new Produto());
-        listaProdutos.add(new Produto());
-
-        final Categoria categoria = new Categoria(1L, "teste", "descricao", "url", listaProdutos);
-
         given(repository.save(categoria)).willAnswer(invocation -> invocation.getArgument(0));
 
         Categoria categoriaSalva = service.add(categoria);

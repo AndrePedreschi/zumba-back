@@ -1,12 +1,13 @@
 package com.example.zumbasquad.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -31,21 +32,25 @@ public class Produto {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "detalhe_id", referencedColumnName = "id")
     private Detalhe detalhes;
-    @OneToMany(mappedBy = "produto")
-    private Set<Imagem> imagens;
-    @ManyToMany(mappedBy = "produtos")
-    private Set<Caracteristica> caracteristicas = new HashSet<>();
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Imagem> imagens;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "caracteristica_produto",
+            joinColumns = {@JoinColumn(name = "produto_id")},
+            inverseJoinColumns = {@JoinColumn(name = "caracteristica_id")})
+    private List<Caracteristica> caracteristicas = new ArrayList<>();
     @ManyToOne
-    @JoinColumn(name = "cidade_id")
+    @JoinColumn(name = "cidade_id", nullable = false)
     private Cidade cidade;
     @ManyToOne
-    @JoinColumn(name = "categoria_id")
+    @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 
     @OneToMany(mappedBy = "produto")
-    private Set<Reserva> reservas;
+    @JsonIgnore
+    private List<Reserva> reservas;
 
-    public Produto(String nome, Descricao descricao, Set<Imagem> imagens, Set<Caracteristica> caracteristicas, Cidade cidade, Categoria categoria) {
+    public Produto(String nome, Descricao descricao, List<Imagem> imagens, List<Caracteristica> caracteristicas, Cidade cidade, Categoria categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.imagens = imagens;
@@ -54,7 +59,7 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public Produto(String nome, Descricao descricao, Set<Imagem> imagens, Set<Caracteristica> caracteristicas, Cidade cidade, Categoria categoria, Set<Reserva> reservas) {
+    public Produto(String nome, Descricao descricao, List<Imagem> imagens, List<Caracteristica> caracteristicas, Cidade cidade, Categoria categoria, List<Reserva> reservas) {
         this.nome = nome;
         this.descricao = descricao;
         this.imagens = imagens;

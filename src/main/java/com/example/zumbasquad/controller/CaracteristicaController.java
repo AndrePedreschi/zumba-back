@@ -2,9 +2,7 @@ package com.example.zumbasquad.controller;
 
 import com.example.zumbasquad.exceptions.BadRequestException;
 import com.example.zumbasquad.model.Caracteristica;
-import com.example.zumbasquad.model.Cidade;
 import com.example.zumbasquad.service.CaracteristicaService;
-import com.example.zumbasquad.service.CidadeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

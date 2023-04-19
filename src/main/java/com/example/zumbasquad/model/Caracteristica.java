@@ -1,12 +1,12 @@
 package com.example.zumbasquad.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,14 +20,17 @@ public class Caracteristica {
     private Long id;
     private String nome;
     private String icone;
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name = "caracteristica_produto",
-            joinColumns = {@JoinColumn(name = "caracteristica_id")},
-            inverseJoinColumns = {@JoinColumn(name = "produto_id")})
-    private Set<Produto> produtos = new HashSet<>();
+    @ManyToMany(mappedBy = "caracteristicas")
+    @JsonIgnore
+    private List<Produto> produtos;
 
     public Caracteristica(String nome, String icone) {
         this.nome = nome;
         this.icone = icone;
+    }
+
+    public Caracteristica(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
     }
 }

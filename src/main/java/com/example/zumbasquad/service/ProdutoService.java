@@ -1,8 +1,6 @@
 package com.example.zumbasquad.service;
 
-import com.example.zumbasquad.model.Cidade;
 import com.example.zumbasquad.model.Produto;
-import com.example.zumbasquad.model.Reserva;
 import com.example.zumbasquad.repository.IProdutoRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +18,10 @@ public class ProdutoService {
     public List<Produto> getAll() { return repository.findAll(); }
 
     public Produto getById(Long id) { return repository.findById(id).get(); }
+
+    public Produto update(Produto produto){
+        return repository.saveAndFlush(produto);
+    }
 
     public List<Produto> getAllProductsByCityId(Long id) { return repository.findByCidadeId(id); }
 

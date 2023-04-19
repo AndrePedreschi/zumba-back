@@ -1,11 +1,12 @@
 package com.example.zumbasquad.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,7 +21,8 @@ public class Categoria {
     private String descricao;
     private String urlImagem;
     @OneToMany(mappedBy = "categoria")
-    private Set<Produto> produtos;
+    @JsonIgnore
+    private List<Produto> produtos;
 
     public Categoria(String qualificacao, String descricao, String urlImagem) {
         this.qualificacao = qualificacao;

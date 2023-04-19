@@ -1,5 +1,6 @@
 package com.example.zumbasquad.config;
 
+import com.example.zumbasquad.auth.JwtService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
@@ -51,7 +52,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 logger.error("Authentication Failed. Username or Password not valid.");
             }
         } else {
-            logger.warn("Couldn't find bearer string, header will be ignored");
+            logger.info("Couldn't find bearer string, header will be ignored");
         }
 
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {

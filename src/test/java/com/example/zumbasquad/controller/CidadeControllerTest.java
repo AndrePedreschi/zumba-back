@@ -1,7 +1,7 @@
 package com.example.zumbasquad.controller;
 
 import com.example.zumbasquad.config.JwtAuthenticationFilter;
-import com.example.zumbasquad.config.JwtService;
+import com.example.zumbasquad.auth.JwtService;
 import com.example.zumbasquad.model.Cidade;
 import com.example.zumbasquad.service.CidadeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,13 +18,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.CoreMatchers.is;
 
 
 @WebMvcTest(controllers = CidadeController.class)

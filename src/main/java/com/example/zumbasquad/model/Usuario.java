@@ -15,9 +15,9 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue(value = "U")
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.STRING)
+//@DiscriminatorValue(value = "U")
 @Data
 @Builder
 @AllArgsConstructor
@@ -36,8 +36,10 @@ public class Usuario implements UserDetails {
 //    @JoinColumn(name = "papel_id", referencedColumnName = "id")
     @Enumerated(EnumType.STRING)
     private EnumPapel papel;
-
+    @OneToMany(mappedBy = "usuario")
     @JsonIgnore
+    private List<Reserva> reservas;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(papel.name()));
@@ -78,4 +80,5 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

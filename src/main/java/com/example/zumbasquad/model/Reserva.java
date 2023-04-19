@@ -7,11 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Data
@@ -31,15 +27,18 @@ public class Reserva {
     @ManyToOne
     @JoinColumn(name = "produto_id")
     private Produto produto;
+//    @ManyToOne
+//    @JoinColumn(name = "cliente_id")
+//    private Cliente cliente;
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
-    public Reserva(LocalTime hora, LocalDate dataInicial, LocalDate dataFinal, Produto produto, Cliente cliente) {
+    public Reserva(LocalTime hora, LocalDate dataInicial, LocalDate dataFinal, Produto produto, Usuario usuario) {
         this.hora = hora;
         this.dataInicial = dataInicial;
         this.dataFinal = dataFinal;
         this.produto = produto;
-        this.cliente = cliente;
+        this.usuario = usuario;
     }
 }

@@ -1,7 +1,9 @@
 package com.example.zumbasquad.auth;
 
-import com.example.zumbasquad.config.JwtService;
 import com.example.zumbasquad.enums.EnumPapel;
+import com.example.zumbasquad.model.auth.AuthenticationRequest;
+import com.example.zumbasquad.model.auth.AuthenticationResponse;
+import com.example.zumbasquad.model.auth.RegisterRequest;
 import com.example.zumbasquad.model.Usuario;
 import com.example.zumbasquad.repository.IUsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +31,7 @@ public class AuthenticationService {
                .sobrenome(request.getSobrenome())
                .email(request.getEmail())
                .senha(passwordEncoder.encode(request.getSenha()))
-               .papel(EnumPapel.USER)
+               .papel(EnumPapel.ADMIN)
                .build();
        repository.save(user);
        var jwtToken = jwtService.generateToken(user);

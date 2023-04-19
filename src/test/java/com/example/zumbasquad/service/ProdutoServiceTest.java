@@ -77,6 +77,18 @@ public class ProdutoServiceTest {
     }
 
     @Test
+    void deveAtualizarProduto(){
+        given(repository.saveAndFlush(produto)).willReturn(produto);
+        produto.setFavorito(true);
+        produto.setNome("teste");
+
+        Produto produtoAtualizado = service.update(produto);
+
+        assertThat(produtoAtualizado.getNome()).isEqualTo(produto.getNome());
+        assertThat(produtoAtualizado.isFavorito()).isTrue();
+    }
+
+    @Test
     void deveBuscarProdutosPorIdDaCidade(){
         final Long id = 1L;
 
@@ -127,10 +139,5 @@ public class ProdutoServiceTest {
 
         assertEquals(produtosEsperados, produtos);
     }
-
-
-
-
-
 
 }
